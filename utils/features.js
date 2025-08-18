@@ -66,7 +66,16 @@ const uploadFilesToCloudinary = async (files = []) => {
   }
 };
 
-const deleteFilesFromCloudinary = async (public_id) => {};
+const deleteFilesFromCloudinary = async (public_id) => {
+  try {
+    const result = await cloudinary.uploader.destroy(public_id);
+    console.log("Cloudinary delete result:", result);
+    return result;
+  } catch (error) {
+    console.error("Error deleting file from Cloudinary:", error);
+    throw error;
+  }
+};
 
 export {
   connectDB,
